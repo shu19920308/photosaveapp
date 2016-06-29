@@ -1,0 +1,7 @@
+/* This is a CSS file */
+#sampleRegion
+{
+    width: 50vw;
+    height: 50vh;
+    background-color: red;    
+}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+  <html>
+  <head>
+    <meta charset="utf-8"/>
+    <script type="text/javascript" src="components/loader.js"></script>
+    <script type="text/javascript" src="components/appJavascript.js"></script>
+    <script type="text/javascript">
+        document.addEventListener("deviceready", onDeviceReady, false);
+
+      function onDeviceReady()
+      {
+          //window.alert ('Loading PhoneGap is completed');
+      }
+
+      function onSuccess (imageURI) 
+      {
+            var largeImage = document.getElementById ('picture');
+            largeImage.style.display = 'block';
+            largeImage.src = imageURI;
+      }
+
+      function getPhoto() 
+      {
+        //引数のsourceType 写真の取得方法を指定しています。端末のアルバムにアクセスできます
+        //Camera.PictureSourceType.SAVEDPHOTOALBUM
+        //アルバムから画像の選択
+        //quality として 「 50 」、 destinationType として "Camera.DestinationType.DATA_URL"、 Base64 形式の写真を返します。
+        navigator.camera.getPicture(onSuccess, onFail, 
+          { quality: 50,destinationType: Camera.DestinationType.FILE_URI,
+          sourceType: navigator.camera.PictureSourceType.SAVEDPHOTOALBUM });
+      }
+
+      function onFail (message) 
+      {
+          alert('error ' + message);
+      }
+      
+      function pagesave()
+      {
+          alert("確認");
+          
+      }
+      
+      
+      
+      function pagemove()
+      {
+          alert("確認1");
+          location.href = "app.html";
+      }
+    </script>
+  </head>
+      <body onload="test()">
+        <h1>端末から写真を選んでください</h1>
+        <input type="button" onclick="getPhoto();" value="写真を選んでください"><br>
+        <img style="display:none;" id="picture" src="" width="150" height="150" />
+        <button id="imgsave" onclick="pagesave()">
+            画像保存
+        </button>
+        <button id="pagemoveID" onclick="pagemove()">
+            ページ遷移
+        </button>
+      </body>
+  </html>
